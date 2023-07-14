@@ -1,6 +1,9 @@
 'use client'
 import type { FC } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { isEqual } from 'lodash'
+import classNames from 'classnames'
 
 type NavigationItemProps = {
 	value: string
@@ -21,18 +24,24 @@ const NAVIGATION_ITEMS: NavigationItemProps[] = [
 		value: 'Phụ kiện',
 		href: '/chuyen-muc/phu-kien',
 	},
+	{
+		value: 'Túi sách',
+		href: '/chuyen-muc/tui-sach',
+	},
 ]
 
 const Navigation: FC = () => {
-	const router = useRouter()
-
-	console.log(router)
+	const pathname = usePathname()
 
 	return (
-		<nav>
-			<ul>
+		<nav className='flex-1 h-full'>
+			<ul className='flex flex-row divide-x h-full'>
 				{NAVIGATION_ITEMS.map((props, index) => (
-					<NavigationItem key={index} {...props} />
+					<NavigationItem
+						key={index}
+						{...props}
+						isActive={isEqual(pathname, props.href)}
+					/>
 				))}
 			</ul>
 		</nav>
@@ -40,7 +49,20 @@ const Navigation: FC = () => {
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ value, href, isActive }) => {
-	return <li>{value}</li>
+	const classes = classNames(
+		'text-gray-600 text-xs border-b-2 border-transparent font-bold uppercase transition duration-200 hover:text-pink-500 hover:border-b-pink-400 px-3 h-full flex items-center',
+		{
+			'bg-pink-300 !text-white !border-none': isActive,
+		},
+	)
+
+	return (
+		<li className='relative h-full'>
+			<Link className={classes} href={href}>
+				{value}
+			</Link>
+		</li>
+	)
 }
 
 export default Navigation
