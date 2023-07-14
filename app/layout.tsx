@@ -10,7 +10,7 @@ import {
 
 import './globals.scss'
 
-import Header from '@/app/common/components/header'
+import Header from '@common/components/header'
 
 const inter = Inter({ subsets: ['latin'] })
 
