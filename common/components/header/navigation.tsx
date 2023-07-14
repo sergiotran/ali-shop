@@ -4,31 +4,8 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { isEqual } from 'lodash'
 import classNames from 'classnames'
-
-type NavigationItemProps = {
-	value: string
-	href: string
-	isActive?: boolean
-}
-
-const NAVIGATION_ITEMS: NavigationItemProps[] = [
-	{
-		value: 'Trang chủ',
-		href: '/',
-	},
-	{
-		value: 'Mỹ phẩm',
-		href: '/chuyen-muc/my-pham',
-	},
-	{
-		value: 'Phụ kiện',
-		href: '/chuyen-muc/phu-kien',
-	},
-	{
-		value: 'Túi sách',
-		href: '/chuyen-muc/tui-sach',
-	},
-]
+import { NavigationItemProps } from '@/common/types/navigation'
+import { NAVIGATION_ITEMS } from '@/common/constants/global'
 
 const Navigation: FC = () => {
 	const pathname = usePathname()

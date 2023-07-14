@@ -26,7 +26,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
 		<html>
 			<body className={classes}>
 				<Header />
-				{children}
+				<main className='py-3'>
+					<div className='container'>{children}</div>
+				</main>
 			</body>
 		</html>
 	)
